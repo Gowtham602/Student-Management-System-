@@ -26,7 +26,7 @@
 // });
 
 
-
+console.log("js is runing");
 $(function () {
 
     $("#createStudentForm").submit(function (e) {
