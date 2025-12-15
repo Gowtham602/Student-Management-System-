@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
     <!-- Your CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style/style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/style/style.css') }}"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 </head>
