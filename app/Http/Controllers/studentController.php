@@ -35,7 +35,7 @@ class studentController extends Controller
     }
 
     public function data(){
-        $student = student::all();
+        $student = Student::all();
         return response()->json([
             'message'=>'data fetch successfully',
             'data' =>$student
