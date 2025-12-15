@@ -42,5 +42,5 @@
     });
 </script>
 
-<!-- <script src="{{ asset('js/student.js') }}"></script> -->
+<script src="{{ asset('js/student.js') }}"></script>
 @endpush
