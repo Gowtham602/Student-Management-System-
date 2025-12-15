@@ -25,7 +25,7 @@
 //     document.body.classList.toggle("dark-theme");
 // });
 
-
+alert("studentjs is load");
 console.log("js is runing");
 $(function () {
 
