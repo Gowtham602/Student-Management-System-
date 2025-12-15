@@ -1,29 +1,3 @@
-// $(document).ready(function () {
-//     $("#createStudentForm").submit(function (e) {
-//         e.preventDefault();
-
-//         let formData = $(this).serialize();
-
-//         $.ajax({
-//             url: createStudentUrl, 
-//             type: "POST",
-//             data: formData,
-//             success: function (response) {
-//                 alert("Student created successfully!");
-//                 $("#createStudentModal").modal('hide');
-//                 $("#createStudentForm")[0].reset();
-//                 location.reload();
-//             },
-//             error: function (xhr) {
-//                 alert("Error: " + xhr.responseText);
-//             }
-//         });
-//     });
-// });
-
-// document.getElementById("themedark").addEventListener("click",function(){
-//     document.body.classList.toggle("dark-theme");
-// });
 
 alert("studentjs is load");
 console.log("js is runing");

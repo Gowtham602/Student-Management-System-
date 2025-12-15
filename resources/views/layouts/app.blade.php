@@ -51,15 +51,7 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 <!-- Page-specific scripts -->
-@push('scripts')
-<script>
-    const createStudentUrl = "{{ route('student.store') }}";
-    const studentsDataUrl  = "{{ route('student.list') }}";
-</script>
-
-<script src="{{ asset('js/student.js') }}"></script>
-@endpush
-
+@stack('scripts')
 
 </body>
 </html>
