@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return view('students.index');
@@ -18,3 +19,8 @@ Route::get("/dashboard",[DashboardController::class,'index'])->name('dashboard.i
 
 
 
+
+
+Route::get('/db-driver', function () {
+    return DB::connection()->getDriverName();
+});
