@@ -29,6 +29,7 @@ alert("studentjs is load");
 console.log("js is runing");
 $(function () {
 
+    if ($("#createStudentForm").length) {
     $("#createStudentForm").submit(function (e) {
         e.preventDefault();
 
@@ -39,17 +40,13 @@ $(function () {
             type: "POST",
             data: formData,
             success: function (response) {
-
                 toastr.success("Student created successfully!");
-
                 $("#createStudentModal").modal('hide');
                 $("#createStudentForm")[0].reset();
                 $('#studentsTable').DataTable().ajax.reload(null, false);
             },
             error: function (xhr) {
-
                 if (xhr.status === 422) {
-                    // Validation error
                     let errors = xhr.responseJSON.errors;
                     $.each(errors, function (key, value) {
                         toastr.error(value);
@@ -57,41 +54,42 @@ $(function () {
                 } else {
                     toastr.error("Something went wrong!");
                 }
-            },
-            complete: function(){
-                $("#saveStudentBtn").prop("disabled", false).text("Save Student");
             }
         });
     });
+}
+
 
 });
 
 
 //table to show 
-$('#studentsTable').DataTable({
-    ajax: studentsDataUrl,
-    columns: [
-        {
-            data: null,
-            render: function (data, type, row, meta) {
-                return meta.row + 1; 
+if ($('#studentsTable').length) {
+    $('#studentsTable').DataTable({
+        ajax: studentsDataUrl,
+        columns: [
+            {
+                data: null,
+                render: function (data, type, row, meta) {
+                    return meta.row + 1;
+                }
+            },
+            { data: 'first_name' },
+            { data: 'last_name' },
+            { data: 'email' },
+            {
+                data: null,
+                render: function (data, type, row) {
+                    return `
+                        <button class="btn btn-sm btn-primary edit-btn" data-id="${row.id}">Edit</button>
+                        <button class="delete-btn btn btn-sm btn-danger" data-id="${row.id}">Delete</button>
+                    `;
+                }
             }
-        },
-          
-        { data: 'first_name' },
-        { data: 'last_name' },
-        { data: 'email' },
-        {
-            data: null,
-            render: function (data, type, row) {
-                return `
-                    <button class="btn btn-sm btn-primary edit-btn" data-id="${row.id}">Edit</button>
-                    <button class="delete-btn btn btn-sm btn-danger" data-id="${row.id}">Delete</button>
-                `;
-            }
-        }
-    ]
-});
+        ]
+    });
+}
+
 //edit 
 $(document).on("click", ".edit-btn", function () {
     let id = $(this).data("id");
