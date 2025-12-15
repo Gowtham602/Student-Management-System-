@@ -34,13 +34,34 @@ class StudentController extends Controller
         ], 200);
     }
 
-    public function data(){
-        $student = Student::all();
+   
+
+public function data()
+{
+    try {
+        $students = Student::select(
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+            'dob',
+            'phone',
+            'class',
+            'section',
+            'address'
+        )->get();
+
         return response()->json([
-            'message'=>'data fetch successfully',
-            'data' =>$student
-        ],status: 200);
+            'data' => $students
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'error' => true,
+            'message' => $e->getMessage()
+        ], 500);
     }
+}
+
     //edit 
     public function edit ($id){
       return  $student = student::findOrFail($id);
