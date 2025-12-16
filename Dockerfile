@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
 # Install system packages
 RUN apt-get update && apt-get install -y \
@@ -6,19 +6,11 @@ RUN apt-get update && apt-get install -y \
     git \
     zip
 
-# Install PHP extensions (MYSQL FIX)
+# Install PHP extensions (MySQL)
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Enable Apache rewrite
-RUN a2enmod rewrite
+WORKDIR /app
 
-# Set Laravel public folder
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' \
-    /etc/apache2/sites-available/*.conf \
-    /etc/apache2/apache2.conf
-
-WORKDIR /var/www/html
 COPY . .
 
 # Install Composer
@@ -26,7 +18,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
 # Permissions
-RUN chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
-EXPOSE 80
+# Railway will provide PORT
+CMD php -S 0.0.0.0:$PORT -t public
